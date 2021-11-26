@@ -61,6 +61,12 @@ export default function Room() {
 		})
 	}, [])
 
+	useEffect(() => {
+		socket.on('finished', (winner) => {
+			toast.success("Winner is: ", winner)
+		})
+	}, [])
+
 	function handleWidthChange(width) {
 		setWidthRight((100 - width).toString())
 		setWidthLeft(width.toString())
@@ -87,12 +93,13 @@ export default function Room() {
 			console.log(outputBody.trim().toLowerCase(), room["output"].trim().toLowerCase())
 			if(outputBody.trim().toLowerCase() === room["output"].trim().toLowerCase()) {
 				socket.emit('successful submission', { roomId: id })
+				socket.emit('finished', { roomId: id, winner: "Satyam" })
 			} else {
 				socket.emit('unsuccessful submission', { roomId: id })
 			}
 		})
 	}
-	
+
 	useEffect(() => {
 		localStorage.setItem("language", language)
 	}, [language])

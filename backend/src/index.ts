@@ -60,6 +60,10 @@ io.on("connection", (socket: Socket) => {
     socket.on('unsuccessful submission', ({ roomId }) => {
         socket.broadcast.to(roomId).emit('unsuccessful submission', true)
     })
+
+    socket.on('finished', ({ roomId, winner }) => {
+        socket.broadcast.to(roomId).emit('finished', winner)
+    })
 })
 
 /**

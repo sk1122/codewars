@@ -9,7 +9,7 @@ export const connection = createConnection({
     password: "satyam#789", // our created username, you can have your own password
     database: "codewars", // our created database name, you can have your own
     entities: [
-		Room
+		  Room
     ],
     synchronize: true,
     logging: false
